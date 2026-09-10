@@ -68,8 +68,9 @@ const generateReport = (originList) => {
 
 // 运行程序，捕获异常保证程序不会崩溃
 try {
-  console.table(courses);
-  console.log(generateReport(courses));
+  console.log('你录入的所有课程原始数据：');
+  console.table(inputCourses);
+  console.log(generateReport(inputCourses));
 } catch (err) {
   console.error('绩点计算出错：', err.message);
 }
