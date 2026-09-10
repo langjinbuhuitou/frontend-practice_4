@@ -1,12 +1,23 @@
-const courses = [
-  { name: '高等数学', score: 85, credit: 4 },
-  { name: '大学英语', score: 76, credit: 3 },
-  { name: '程序设计基础', score: 92, credit: 4 },
-  { name: '体育', score: 68, credit: 1 },
-  { name: '非法成绩测试1', score: -5, credit: 2 },
-  { name: '非法成绩测试2', score: 108, credit: 3 },
-  { name: '非法学分测试', score: 80, credit: -2 }
-];
+// 交互式prompt录入流程
+const inputCourses = [];
+// 先询问要录入几门课程
+const courseCountStr = prompt('请输入你要计算绩点的课程总门数：');
+// 把输入转成数字，非法输入默认设为0
+const courseCount = parseInt(courseCountStr) || 0;
+
+// 循环逐门录入课程信息
+for (let i = 0; i < courseCount; i++) {
+  const name = prompt(`请输入第${i+1}门课程的名称：`);
+  const scoreStr = prompt(`请输入【${name}】的百分制成绩：`);
+  const creditStr = prompt(`请输入【${name}】的课程学分：`);
+
+  // 自动转类型，非法输入直接生成非法数据交给清洗函数处理
+  inputCourses.push({
+    name: name || `未命名课程${i+1}`,
+    score: Number(scoreStr) || 0,
+    credit: Number(creditStr) || 0
+  });
+}
 
 /*数据清洗函数*/
 const cleanCourses = (list) => {
