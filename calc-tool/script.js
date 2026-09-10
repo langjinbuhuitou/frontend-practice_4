@@ -37,3 +37,28 @@ const calcTotalGpa = (validList) => {
   }, 0);
   return (totalWeight / totalCredit).toFixed(2);
 };
+
+/*报告生成函数*/
+const generateReport = (originList) => {
+  const validCourses = cleanCourses(originList);
+  if (validCourses.length === 0) {
+    return '没有合法的有效课程数据，无法计算绩点';
+  }
+  const totalGpa = calcTotalGpa(validCourses);
+  const totalCredit = validCourses.reduce((sum, c) => sum + c.credit, 0);
+
+  return `===== 绩点计算报告 =====
+原始课程共 ${originList.length} 门
+清洗后有效课程共 ${validCourses.length} 门
+总修读学分：${totalCredit} 学分
+你的加权平均绩点为：${totalGpa}
+========================`;
+};
+
+// 运行程序，捕获异常保证程序不会崩溃
+try {
+  console.table(courses);
+  console.log(generateReport(courses));
+} catch (err) {
+  console.error('绩点计算出错：', err.message);
+}
